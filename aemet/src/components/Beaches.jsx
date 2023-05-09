@@ -37,7 +37,7 @@ const Beaches = () => {
 
   return (
     <div className='prediction'>
-      <Link to='/Home'>Home</Link>
+      <Link to='/'>Home</Link>
       <h1>Prediction for {name}</h1>
       {predictions.map((prediction, index) => (
         <article key={index}>
