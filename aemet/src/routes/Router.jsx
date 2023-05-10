@@ -2,13 +2,18 @@ import { createBrowserRouter } from "react-router-dom";
 import Home from "../components/Home";
 import Prediction from "../components/Prediction";
 import Beaches from "../components/Beaches";
+import App from "../App";
 
 const Router = createBrowserRouter([
   {
     path: "/",
-    element: <Home />,
+    element: <App />,
     errorElement: <h1>404 not found</h1>,
     children: [
+      {
+        path: "/",
+        element: <Home />,
+      },
       {
         path: "/prediction",
         element: <Prediction />,
