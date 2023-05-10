@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
+
 import codes from "../data/bizkaia.json";
 
 const Prediction = () => {
@@ -19,6 +19,10 @@ const Prediction = () => {
   useEffect(() => {
     if (id !== undefined) {
       setLocationCode(id);
+      const name = codes.find(
+        (code) => getCode(code.CPRO, code.CMUN) === id
+      ).NOMBRE;
+      setLocation(name);
     }
   }, [id]);
 
@@ -43,7 +47,6 @@ const Prediction = () => {
   const getPrediction = (data) => {
     const newPredictions = data[0].prediccion.dia;
     setPredictions(newPredictions);
-    setLocation(data[0].nombre);
     console.log(newPredictions);
   };
 
@@ -84,7 +87,6 @@ const Prediction = () => {
 
   return (
     <div className='prediction'>
-      <Link to='/'>Home</Link>
       <h1>Prediction for {location}</h1>
       <select
         name='location'
@@ -92,7 +94,7 @@ const Prediction = () => {
         onChange={(e) => goTo(e.target.value)} // est goto es elq nos da la url con el codigo numerico del municipio
         value={locationCode ? locationCode : ""}
       >
-        {!locationCode && <option value=''>selecciona un municipio</option>}{" "}
+        {!locationCode && <option value=''>selecciona un municipio</option>}
         {/* te da la opcion de seleccionar municipio sino esta seleciconado ninguno*/}
         {codes.map((code, index) => (
           <option key={index} value={getCode(code.CPRO, code.CMUN)}>
